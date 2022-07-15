@@ -82,7 +82,7 @@ app.put("/api/deactivated", jsonparser, (request, response) => {
 
 // Socket.io |  Updating the content without refreshing the browser
 
-let io = require("socket.io")(server);
+let io = require("socket.io")(http);
 
 io.on("connection", (socket) => {
   console.log(`New client connection: ${socket.id}`);
