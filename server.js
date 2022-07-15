@@ -1,13 +1,16 @@
 const Datastore = require("nedb");
 const express = require("express");
-const bodyparser = require('body-parser');
+const bodyparser = require("body-parser");
 var jsonparser = bodyparser.json();
 const { request, response } = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
-server = app.listen(3000, () => console.log(`listening at PORT: ${port}`));
 app.use(express.static("public"));
-app.use(bodyparser.json({limit: '1mb'}));
+const http = require("http").Server(app);
+server = http.listen(3000, function () {
+  console.log(`listening at PORT: ${port}`);
+});
+app.use(bodyparser.json({ limit: "1mb" }));
 
 // Database
 
@@ -26,17 +29,21 @@ app.get("/api", (request, response) => {
 });
 
 app.post("/api", (request, response) => {
-  console.log("[SERVER] a request has been received via POST for Database 1 [INSERT Commission]");
+  console.log(
+    "[SERVER] a request has been received via POST for Database 1 [INSERT Commission]"
+  );
   const data = request.body;
   database.insert(data);
   response.json(data);
 });
 
-app.put("/api", jsonparser,(request) => {
-  console.log("[SERVER] a request has been received via PUT for Database 1 [DELETE Commission]");
+app.put("/api", jsonparser, (request) => {
+  console.log(
+    "[SERVER] a request has been received via PUT for Database 1 [DELETE Commission]"
+  );
   const data = request.body;
   database.remove(data);
-  console.log('[SERVER] a item from Database 1 was successfully removed');
+  console.log("[SERVER] a item from Database 1 was successfully removed");
 });
 
 // SecondDatabase
@@ -56,17 +63,21 @@ app.get("/api/deactivated", (request, response) => {
 });
 
 app.post("/api/deactivated", (request, response) => {
-  console.log("[SERVER] a request has been received via POST for Database 2 [MOVE Commission]");
+  console.log(
+    "[SERVER] a request has been received via POST for Database 2 [MOVE Commission]"
+  );
   const data = request.body;
   SecondDatabase.insert(data);
   response.json(data);
 });
 
-app.put("/api/deactivated", jsonparser,(request, response) => {
-  console.log("[SERVER] a request has been received via PUT for Database 2 [DELETE Commission]");
+app.put("/api/deactivated", jsonparser, (request, response) => {
+  console.log(
+    "[SERVER] a request has been received via PUT for Database 2 [DELETE Commission]"
+  );
   const data = request.body;
   SecondDatabase.remove(data);
-  console.log('[SERVER] a item from Database 2 was successfully removed');
+  console.log("[SERVER] a item from Database 2 was successfully removed");
 });
 
 // Socket.io |  Updating the content without refreshing the browser
@@ -92,8 +103,8 @@ io.on("connection", (socket) => {
 
 // Error handling
 
-app.use(function(req, res) {
+app.use(function (req, res) {
   res.status(404);
-  res.sendFile(__dirname + '/public/404.html');
+  res.sendFile(__dirname + "/public/404.html");
   return;
 });
