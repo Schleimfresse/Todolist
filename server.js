@@ -4,7 +4,9 @@ const bodyparser = require("body-parser");
 var jsonparser = bodyparser.json();
 const { request, response } = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
+const port = process.env.PORT || 5000;
 app.use(express.static("public"));
 const http = require("http").Server(app);
 server = http.listen(3000, function () {
@@ -81,8 +83,6 @@ app.put("/api/deactivated", jsonparser, (request, response) => {
 });
 
 // Socket.io |  Updating the content without refreshing the browser
-
-let io = require("socket.io")(http);
 
 io.on("connection", (socket) => {
   console.log(`New client connection: ${socket.id}`);
