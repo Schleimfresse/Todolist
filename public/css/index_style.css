@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap");
+* {
+  transition: 250ms;
+}
+.dark {
+  --standart_gray: #171717;
+  --header: #171717;
+  --todo-bg: rgba(0, 0, 0, 30%);
+  --darker_gray: #6e6e6e;
+  --border-color: #404040;
+  color: #fff;
+  --color: #fff;
+  --shadow: 12px 8px 10px 0px rgba(107, 107, 107, 40%),
+    0px 1px 3px 0px rgb(0 0 0 / 8%);
+}
+.light {
+  --standart_gray: #fff;
+  --header: #000;
+  --todo-bg: rgba(0, 0, 0, 30%);
+  --darker_gray: #6e6e6e;
+  --border-color: #404040;
+  color: #272a2f;
+  --color: #272a2f;
+  --shadow: 12px 8px 10px 0px rgba(0, 0, 0, 40%),
+    0px 1px 3px 0px rgb(0 0 0 / 8%);
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--standart_gray);
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+}
+.main{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  top: 5cm;
+  min-width: 100%;
+}
+#client,
+#server {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 2em;
+  min-width: 90%;
+}
+.button {
+  border: none;
+  text-align: center;
+  border-radius: 10px;
+  background-color: var(--standart_gray);
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: none;
+  min-width: 100%;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  letter-spacing: 5px;
+  line-height: 1;
+  box-shadow: var(--shadow);
+  border: var(--border-color) solid 1px;
+}
+.button:hover {
+  background-color: var(--todo-bg);
+}
+#header {
+  position: absolute;
+  letter-spacing: 20px;
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  font-size: 2em;
+  margin: 2rem;
+}
+.icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+  background-color: var(--todo-bg);
+  border-bottom: var(--border-color) solid 0.5px;
+  border-left: var(--border-color) solid 0.5px;
+  border-radius: 0 0 0 5px;
+  color: var(--color);
+  transition: 250ms;
+}
+.button:hover .icon {
+  background-color: var(--todo-bg);
+}
+
+#darkmode-bt {
+  bottom: 0;
+  right: 0;
+  padding: 0.5em;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.icon-size-right {
+  font-size: 32px;
+}
+@media (min-width: 900px){
+  .main{
+    flex-direction: row;
+    top: unset;
+  }
+  #client,
+  #server {
+    height: 100%;
+    width: 50vw;
+    min-width: unset;
+  }
+  #header{
+    font-size: 4em;
+  }
+  .button{
+    font-size: 1.5em;
+    min-width: 40vw;
+    min-height: 40vh;
+  }
+}

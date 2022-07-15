@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="author" content="Schleimfresse" />
+    <title>Local | ToDo List</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/suffixpref.js"></script>
+    <script src="js/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <div id="tutorial-box">
+      <div id="tutorial-box-header"><h1>Introduction</h1><div id="Width-in-content-box"><span id="Width-in-content">1</span>/5</div></div>
+      <div id="content-holder">
+      <div class="content" id="content-1" style="display: block;" data-id='1'>
+        <h2>1. Creating a Todo</h2>
+        <p>To create a todo, click in the text field at the top right and write your todo. Once this is done, you can set the quantity setting to determine whether your todo should have a quantity (e.g. if food is missing: 5x flour, etc.) If the check mark is set, this means with quantity; the default setting for the quantity is 1.</p>
+      </div>
+      <div class="content" id="content-2" data-id='2'>
+        <h2>2. Changing the suffix of the quantity number</h2>
+        <p>To change the suffix, click on the cogwheel in the upper right corner. Once you have done this, a settings menu will appear. The suffixes available are a dot, an x, the word "Times" and no suffix at all. To make a setting now, hover over the various settings on the right. when you do this, you will see small grey arrows. if you click on these, the green arrow will move and the new setting will be active.</p>
+      </div>
+      <div class="content" id="content-3" data-id='3'>
+        <h2>3. The "Complete" function and the deletion of todos</h2>
+        <h3>The "Complete" function</h3>
+        <p>To mark a todo as finished, click on the bookmark to the far left of your todo. When this is done, you will notice that the text is greyed out and a line has been drawn through the text. The todo is now marked as finished and can be reactivated at any time by simply clicking on the bookmark again.
+          Note: you can only use the bookmark every three seconds.</p>
+        <h3>Deleting todos</h3>
+        <p>To delete todos, click on the checkbox to the far right of the todo you want to delete. When you do this, the todo is completely deleted from the system and you cannot restore it.</p>
+      </div>
+      <div class="content" id="content-4" data-id='4'>
+        <h2>4. Difference between the local and public version of the todo list</h2>
+        <h3>The local todo list</h3>
+        <p>The local todo list stores the user data on the device (therefore local) and retrieves it from there. The advantage is that you do not need a permanent internet connection because the data is stored on the device; you only need a connection to load the page. Everyone therefore has their own local todo list, as no other device can access it.</p>
+        <h3>The public todo list</h3>
+        <p>The public todolist variant, on the other hand, stores the data in databases located on the server, which means that you need an internet connection to call up the todos or to delete or add them (so you actually need an internet connection all the time). The advantage of this is that the todo list is shared with everyone and you can see when others delete or add a todo.</p>
+      </div>
+      <div class="content" id="content-5" data-id='5'>
+        <h2>You are done</h2>
+        <p>Hopefully you understood how the system works so that you can use it now properly.</p>
+      </div>
+    </div>
+      <div id="help-bt-section"><button class="help-bt" onclick="tutorial();"><span class="bt-text">Close</span><ion-icon class="icon-size-right icon-right" name="close-circle-outline"></ion-icon></button><div class="flex-row"><button id="back" class="help-bt"><ion-icon class="icon-size-right icon-left" name="arrow-back-circle-outline"></ion-icon><span class="bt-text">Back</span></button><button id="next" class="help-bt"><span class="bt-text">Next</span><ion-icon class="icon-size-right icon-right" name="arrow-forward-circle-outline"></ion-icon></button></button><button onclick="tutorial();" id="finish" class="help-bt"><span class="bt-text">Finish</span><ion-icon class="icon-size-right icon-right" name="checkmark-done-circle-outline"></ion-icon></button></div></div>
+    </div>
+    <header>
+      <div id="mobile-menu"><ion-icon class="icon-size-right" name="menu-outline"></ion-icon></div>
+      <form id="form">
+        <input type="text" id="todofield" placeholder="Enter something" />
+        <div class="number">
+          <input id="quantitycheck" type="checkbox">
+          <span id="quantity-text">Quantity</span>
+          <select name="Anzahl" class="numberselect" id="numberselect">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <button class="bt" type="submit">Submit</button>
+        <span id="invalid"></span>
+      </form>
+      <div id="header-rightmenu">
+        <div class="header-rightmenu-items" id="darkmode-bt"><ion-icon size="large" name="moon-outline"></ion-icon></div>
+        <div class="header-rightmenu-items" id="help" onclick="tutorial();"><ion-icon class="icon-size-right" name="help-circle-outline"></ion-icon></div>
+        <div onclick="expandmenu('changeprefix_box','visible')" id="changeprefix">
+          <ion-icon class="header-rightmenu-items" id="cog" name="cog-outline" size="large"></ion-icon>
+        </div>
+      </div>
+      <div id="changeprefix_box">
+        <p style="margin-top: 0">
+          Sets the Suffix to be used for the todo list
+        </p>
+        <label class="List_Item" style="margin: 0 !important"
+          ><span class="suffix_content">Suffix: x</span>
+          <ion-icon
+            size="large"
+            id="x"
+            onclick="active_suffix(this);x();"
+            class="checkbox_suffix"
+            name="checkmark-outline"></ion-icon>
+        </label>
+        <label class="List_Item"
+          ><span class="suffix_content">Suffix: .</span>
+          <ion-icon
+            size="large"
+            id="punkt"
+            onclick="active_suffix(this); punkt();"
+            class="checkbox_suffix"
+            name="checkmark-outline"></ion-icon>
+        </label>
+        <label class="List_Item"
+          ><span class="suffix_content">Suffix: Times</span>
+          <ion-icon
+            size="large"
+            id="mal"
+            onclick="active_suffix(this); mal();"
+            class="checkbox_suffix"
+            name="checkmark-outline"></ion-icon>
+        </label>
+        <label class="List_Item"
+          ><span class="suffix_content">Suffix: None</span>
+          <ion-icon
+            size="large"
+            id="keins"
+            onclick="active_suffix(this); keins();"
+            class="checkbox_suffix"
+            name="checkmark-outline"></ion-icon>
+        </label>
+      </div>
+      </div>
+    </header>
+    <section id="mobile-box">
+      <form id="form-mobile">
+        <input type="text" id="todofieldmobile" placeholder="Enter something" />
+        <div class="number">
+          <input id="quantitycheck-mobile" type="checkbox">
+          Quantity
+          <select name="quantity" class="numberselect" id="numberselectmobile">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <button class="bt" type="submit">Submit</button>
+        <span id="invalid"></span>
+      </form>
+    </section>
+    <div class="switch">
+      <span><ion-icon onclick="window.open(`/`, '_self');" class="icon icon-size passive" name="home-outline"></ion-icon></span>
+      <span><ion-icon id="active" class="icon icon-size" size="64px" name="desktop-outline"></ion-icon></span>
+      <span><ion-icon onclick="window.open(`/server-based.html`, '_self');" class="icon icon-size passive"  size="64px" name="server-outline"></ion-icon></span>
+    </div>
+    <ul id="todolist"></ul>
+    <div class="type-box"><div class="type">LOCAL</div></div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="js/scriptlocal.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/tutorial.js"></script>
+  </body>
+</html>

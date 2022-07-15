@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index_style.css" />
+    <title>Start | ToDo List</title>
+  </head>
+  <body>
+    <div id="header">SELECT</div>
+    <div class="main">
+      <section id="client">
+          <div onclick="window.open(`client-based.html`, '_self')"  class="button">
+            <ion-icon
+              class="icon"
+              size="64px"
+              name="desktop-outline"
+            ></ion-icon>
+            <p>Private ToDo List <br />[Local]</p>
+          </div>
+      </section>
+      <section id="server">
+          <div onclick="window.open(`server-based.html`, '_self')" class="button">
+            <ion-icon class="icon" size="64px" name="server-outline"></ion-icon>
+            <p>Public ToDo List <br/>[Server]</p>
+          </div>
+      </section>
+    </div>
+      <div class="header-rightmenu-items" id="darkmode-bt"><ion-icon class="icon-size-right" name="moon-outline"></ion-icon></div>
+  </body>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+  <script src="js/darkmode.js"></script>
+</html>
