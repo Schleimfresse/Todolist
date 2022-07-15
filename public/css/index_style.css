@@ -36,7 +36,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
 }
-.main{
+.main {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -111,8 +111,11 @@ body {
 .icon-size-right {
   font-size: 32px;
 }
-@media (min-width: 900px){
-  .main{
+@media (min-width: 900px) {
+  body {
+    overflow: hidden;
+  }
+  .main {
     flex-direction: row;
     top: unset;
   }
@@ -122,10 +125,10 @@ body {
     width: 50vw;
     min-width: unset;
   }
-  #header{
+  #header {
     font-size: 4em;
   }
-  .button{
+  .button {
     font-size: 1.5em;
     min-width: 40vw;
     min-height: 40vh;
