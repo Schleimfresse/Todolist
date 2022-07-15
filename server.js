@@ -1,17 +1,17 @@
 const Datastore = require("nedb");
 const express = require("express");
+const { request, response } = require("express");
 const bodyparser = require("body-parser");
 var jsonparser = bodyparser.json();
-const { request, response } = require("express");
 const app = express();
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const port = process.env.PORT || 3000;
 app.use(express.static("public"));
-const http = require("http").Server(app);
-server = http.listen(3000, function () {
-  console.log(`listening at PORT: ${port}`);
+server.listen(port, () => {
+  console.log(`app listening at Port: ${port}`);
 });
+
 app.use(bodyparser.json({ limit: "1mb" }));
 
 // Database
